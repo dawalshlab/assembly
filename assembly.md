@@ -1,6 +1,6 @@
 # Metagenome assembly pipeline
 
-Created by Susanne Kraemer
+Created by Susanne Kraemer; transcribed and edited by Rebecca Garner
 
 ## Table of contents
 
