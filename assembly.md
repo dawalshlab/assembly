@@ -2,6 +2,15 @@
 
 Created by Susanne Kraemer
 
+## Table of contents
+
+* [Download raw .fastq files](#download-raw-fastq-files)
+  1. [Download files from Nanuq](#1-download-files-from-nanuq)
+  2. [Download files to the server](#2-download-files-to-the-server)
+  3. [Check md5 sums](#3-check-md5-sums)
+
+* [Filter and trim reads](#filter-and-trim-reads)
+
 ## Download raw .fastq files
 
 ### 1. Download files from Nanuq
