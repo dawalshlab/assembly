@@ -17,15 +17,16 @@ Created by Susanne Kraemer
 - Log into [Nanuq](https://genomequebec.mcgill.ca/nanuqAdministration/ "Nanuq").
 - Under the _NovaSeq Read Sets_ tab, check the boxes of your samples and click _Download Read Files_.
 - Check _Download files from selected reads_.
-  - __Type of Download__: Toggle between _Text file with URL links_ and _Md5 File_.
+  - __Type of Download__: Check _Text file with URL links_.
   - __Type of Files to Download__: Uncheck everything but _Fastq R1_ and _Fastq R2_.
-- Download (a folder containing _Readme.txt_, _readSetLinks.txt_, _run_wget.sh_ and (separately) _readSets.md5).
+- Download (downloaded folder contains _Readme.txt_, _readSetLinks.txt_, and _run_wget.sh_).
 
 ### 2. Download files to the server
-- Move the downloaded folder (containing _README_, _readSetLinks.txt_, _run_wget.sh_) to the server.
+- Move the downloaded folder and MD5 file to the server.
 - Run the _run_wget.sh_ script: ```./run_wget.sh```
-- Enter Nanuq username and password.
-- __You should download two .fastq files and two md5 files per sample__.
+- Enter __Nanuq__ username and password.
+  
+This will start the download of two .fastq files (forward _\_R1_ and reverse _\_R2_ reads) and two corresponding md5 files __per sample__.
 
 ### 3. Check md5 sums
 - __md5 sum__: contains file size as a hexadecimal number.

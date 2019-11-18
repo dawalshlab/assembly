@@ -389,20 +389,20 @@ summary {
 <li>Under the <em>NovaSeq Read Sets</em> tab, check the boxes of your samples and click <em>Download Read Files</em>.</li>
 <li>Check <em>Download files from selected reads</em>.
 <ul>
-<li><strong>Type of Download</strong>: Toggle between <em>Text file with URL links</em> and <em>Md5 File</em>.</li>
+<li><strong>Type of Download</strong>: Check <em>Text file with URL links</em>.</li>
 <li><strong>Type of Files to Download</strong>: Uncheck everything but <em>Fastq R1</em> and <em>Fastq R2</em>.</li>
 </ul></li>
-<li>Download (a folder containing <em>Readme.txt</em>, <em>readSetLinks.txt</em>, <em>run_wget.sh</em> and (separately) _readSets.md5).</li>
+<li>Download (downloaded folder contains <em>Readme.txt</em>, <em>readSetLinks.txt</em>, and <em>run_wget.sh</em>).</li>
 </ul>
 </div>
 <div id="download-files-to-the-server" class="section level3">
 <h3>2. Download files to the server</h3>
 <ul>
-<li>Move the downloaded folder (containing <em>README</em>, <em>readSetLinks.txt</em>, <em>run_wget.sh</em>) to the server.</li>
+<li>Move the downloaded folder and MD5 file to the server.</li>
 <li>Run the <em>run_wget.sh</em> script: <code>./run_wget.sh</code></li>
-<li>Enter Nanuq username and password.</li>
-<li><strong>You should download two .fastq files and two md5 files per sample</strong>.</li>
+<li>Enter <strong>Nanuq</strong> username and password.</li>
 </ul>
+<p>This will start the download of two .fastq files (forward <em>_R1</em> and reverse <em>_R2</em> reads) and two corresponding md5 files <strong>per sample</strong>.</p>
 </div>
 <div id="check-md5-sums" class="section level3">
 <h3>3. Check md5 sums</h3>
