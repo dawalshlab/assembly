@@ -14,12 +14,12 @@ Created by Susanne Kraemer
 ## Download raw .fastq files
 
 ### 1. Download files from Nanuq
-- Log into Nanuq.
-- Check the boxes of your samples under the NovaSeq Read Sets tab and click _Download files_.
+- Log into [Nanuq](https://genomequebec.mcgill.ca/nanuqAdministration/ "Nanuq").
+- Under the _NovaSeq Read Sets_ tab, check the boxes of your samples and click _Download Read Files_.
 - Check _Download files from selected reads_.
-- Uncheck everything but _Fastq R1_ and _Fastq R2_.
-- Toggle between _Text file with URL links_ and _Md5 file_.
-- Download (you should get a text file with the links).
+  - __Type of Download__: Toggle between _Text file with URL links_ and _Md5 File_.
+  - __Type of Files to Download__: Uncheck everything but _Fastq R1_ and _Fastq R2_.
+- Download (a folder containing _Readme.txt_, _readSetLinks.txt_, _run_wget.sh_ and (separately) _readSets.md5).
 
 ### 2. Download files to the server
 - Move the downloaded folder (containing _README_, _readSetLinks.txt_, _run_wget.sh_) to the server.
