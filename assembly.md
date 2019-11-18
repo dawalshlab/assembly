@@ -9,7 +9,7 @@ Created by Susanne Kraemer; transcribed and edited by Rebecca Garner
   2. [Download files to the server](#2-download-files-to-the-server)
   3. [Check md5 sums](#3-check-md5-sums)
 
-* [Filter and trim reads](#filter-and-trim-reads)
+* [Trim reads](#trim-reads)
 
 ## Download raw .fastq files
 
