@@ -406,28 +406,37 @@ summary {
 </div>
 <div id="check-md5-sums" class="section level3">
 <h3>3. Check md5 sums</h3>
+<p><strong>md5</strong> files contain file size as a hexadecimal number which can be used to verify file integrity (e.g., make sure your downloads are intact). Use <code>md5sum</code> to ensure that your downloads did not get interrupted. <code>md5sum</code> will check file size and look for the corresponding md5 file for each of your read files and evaluate if there is a match.</p>
 <ul>
-<li><strong>md5 sum</strong>: contains file size as a hexadecimal number.</li>
-<li>md5 sums ensure that your downloads did not get interrupted.</li>
-<li>Check md5 sums (on Linux): <code>md5sum -c</code></li>
-<li>Checking md5 sums will check file size and look for corresponding md5 file for each of our read files and tell you if there is a match.</li>
-<li><em>If file is not OK</em>: Download again.</li>
+<li>Check md5 sums: <code>md5sum -c</code></li>
+<li>If file is not <em>OK</em> (i.e. <em>FAILED</em>): Redownload .fastq and associated files from Nanuq.</li>
 </ul>
 </div>
 </div>
-<div id="filter-and-trim-reads" class="section level2">
-<h2>Filter and trim reads</h2>
+<div id="trim-reads" class="section level2">
+<h2>Trim reads</h2>
+<p>The raw reads in the .fastq files have adaptor sequences attached. We want to remove adaptors and low quality bases. The trimming program (<code>trimmomatic</code>) requires 3 files: forward reads .fastq (zipped), reverse reads .fastq (zipped), and a .fasta file containing the adaptor sequences. The adaptor sequences are available in Nanuq under the <em>NovaSeq Read Sets</em> tab (<em>Adaptor</em> column).</p>
 <ul>
-<li>Reads in the .fastq files still have adapter sequences attached.</li>
-<li>We want to remove adapters and low quality bases.</li>
-<li>Program: trimmomatic-0.38</li>
-<li>The program needs forward read file name, reverse read file name, and file with adapter sequences (you can get those from the librairies tab in Nanuq).</li>
+<li>Create a .fasta file containing the adaptor sequences. E.g.,</li>
 </ul>
-<pre class="shell"><code>java –jar trimmomatic-0.38.jar PE read1.fastq.gz read2.fastq.gz
+<pre><code>&gt;PrefixPE/1
+AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC
+&gt;PrefixPE/2
+AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT</code></pre>
+<ul>
+<li>Trim adaptor sequences, low quality bases, and ultrashort reads with <a href="http://www.usadellab.org/cms/?page=trimmomatic" title="Trimmomatic">trimmomatic</a>-0.38:</li>
+</ul>
+<pre class="shell"><code>java –jar trimmomatic-0.38.jar PE READS_R1.fastq.gz READS_R2.fastq.gz
 trimmed1.p.fastq.gz trimmed1.u.fastq.gz trimmed2.p.fastq.gz
-trimmed2.u.fastq.gz ILLUMINACLIP: NovaSeq.fa:2:30:10 LEADING:3
+trimmed2.u.fastq.gz ILLUMINACLIP:NovaSeq.fa:2:30:10 LEADING:3
 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36</code></pre>
 <ul>
+<li><ul>
+<li><em>READS_R1.fastq.gz</em> and <em>READS_R2.fastq.gz</em> are the raw, zipped .fastq files downloaded from Nanuq.</li>
+<li><em>trimmed1.p.fastq.gz</em> and <em>trimmed2.p.fastq.gz</em> are the outputted trimmed, <em>paired</em> reads.</li>
+<li><em>trimmed1.u.fastq.gz</em> and <em>trimmed2.u.fastq.gz</em> are the outputted trimmed, <em>unpaired</em> reads.</li>
+<li><em>NovaSeq.fa</em> is the .fasta file containing the adaptor sequences.</li>
+</ul></li>
 <li>Proceed with <em>trimmed1.p.fastq.gz</em> and <em>trimmed2.p.fastq.gz</em> files.</li>
 </ul>
 </div>
