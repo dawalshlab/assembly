@@ -11,6 +11,8 @@ Created by Susanne Kraemer; transcribed and edited by Rebecca Garner
 
 * [Trim reads](#trim-reads)
 
+* [Assemble metagenomes](#assemble-metagenomes)
+
 ## Download raw .fastq files
 
 ### 1. Download files from Nanuq
@@ -45,17 +47,31 @@ AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC
 >PrefixPE/2
 AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
 ```
-- Trim adaptor sequences, low quality bases, and ultrashort reads with [trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic "Trimmomatic")-0.38:
+- Trim adaptor sequences, low quality bases, and ultrashort reads with [trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic "Trimmomatic") version 0.38:
 
 ```shell
-java –jar trimmomatic-0.38.jar PE READS_R1.fastq.gz READS_R2.fastq.gz
-trimmed1.p.fastq.gz trimmed1.u.fastq.gz trimmed2.p.fastq.gz
-trimmed2.u.fastq.gz ILLUMINACLIP:NovaSeq.fa:2:30:10 LEADING:3
-TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
+java –jar trimmomatic-0.38.jar PE R1.fastq.gz R2.fastq.gz
+R1_p_trimmed.fastq.gz R1_u_trimmed.fastq.gz R2_p_trimmed.fastq.gz R2_u_trimmed.fastq.gz
+ILLUMINACLIP:NovaSeq.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36
 ```
 - 
-  - _READS_R1.fastq.gz_ and _READS_R2.fastq.gz_ are the raw, zipped .fastq files downloaded from Nanuq.
-  - _trimmed1.p.fastq.gz_ and _trimmed2.p.fastq.gz_ are the outputted trimmed, _paired_ reads.
-  - _trimmed1.u.fastq.gz_ and _trimmed2.u.fastq.gz_ are the outputted trimmed, _unpaired_ reads.
+  - _R1.fastq.gz_ and _R2.fastq.gz_ are the raw, zipped .fastq files downloaded from Nanuq.
+  - _R1_p_trimmed.fastq.gz_ and _R2_p_trimmed.fastq.gz_ are the outputted trimmed, _paired_ reads.
+  - _R1_u_trimmed.fastq.gz_ and _R2_u_trimmed.fastq.gz_ are the outputted trimmed, _unpaired_ reads.
   - _NovaSeq.fa_ is the .fasta file containing the adaptor sequences.
-- Proceed with _trimmed1.p.fastq.gz_ and _trimmed2.p.fastq.gz_ files.
+- Proceed with trimmed reads in _R1_p_trimmed.fastq.gz_ and _R2_p_trimmed.fastq.gz_ files.
+
+## Assemble metagenomes
+
+- Assemble a metagenome relatively quickly with [MEGAHIT](https://github.com/voutcn/megahit "MEGAHIT") version 1.0.6.
+
+```shell
+megahit -1 PATH/R1_p_trimmed.fastq.gz -2 PATH/R2_p_trimmed.fastq.gz
+--k-list 23,43,63,83,103,123 -o PATH/OUTPUT_DIRECTORY/ --verbose
+```
+
+- You can create a combined assembly (co-assembly) by listing reads from separate metagenomes separated by commas.
+
+```shell
+megahit -1 PATH/METAGENOME1_R1_p_trimmed.fastq.gz,PATH/METAGENOME2_R1_p_trimmed.fastq.gz,PATH/METAGENOME3_R1_p_trimmed.fastq.gz -2 PATH/METAGENOME1_R2_p_trimmed.fastq.gz,PATH/METAGENOME2_R2_p_trimmed.fastq.gz,PATH/METAGENOME3_R2_p_trimmed.fastq.gz --k-list 23,43,63,83,103,123 -o PATH/OUTPUT_DIRECTORY/ --verbose
+```

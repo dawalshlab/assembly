@@ -377,7 +377,8 @@ summary {
 <li><a href="#2-download-files-to-the-server">Download files to the server</a></li>
 <li><a href="#3-check-md5-sums">Check md5 sums</a></li>
 </ol></li>
-<li><a href="#trim-reads">Trim reads</a></li>
+<li><p><a href="#trim-reads">Trim reads</a></p></li>
+<li><p><a href="#assemble-metagenomes">Assemble metagenomes</a></p></li>
 </ul>
 </div>
 <div id="download-raw-.fastq-files" class="section level2">
@@ -424,21 +425,32 @@ AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC
 &gt;PrefixPE/2
 AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT</code></pre>
 <ul>
-<li>Trim adaptor sequences, low quality bases, and ultrashort reads with <a href="http://www.usadellab.org/cms/?page=trimmomatic" title="Trimmomatic">trimmomatic</a>-0.38:</li>
+<li>Trim adaptor sequences, low quality bases, and ultrashort reads with <a href="http://www.usadellab.org/cms/?page=trimmomatic" title="Trimmomatic">trimmomatic</a> version 0.38:</li>
 </ul>
-<pre class="shell"><code>java –jar trimmomatic-0.38.jar PE READS_R1.fastq.gz READS_R2.fastq.gz
-trimmed1.p.fastq.gz trimmed1.u.fastq.gz trimmed2.p.fastq.gz
-trimmed2.u.fastq.gz ILLUMINACLIP:NovaSeq.fa:2:30:10 LEADING:3
-TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36</code></pre>
+<pre class="shell"><code>java –jar trimmomatic-0.38.jar PE R1.fastq.gz R2.fastq.gz
+R1_p_trimmed.fastq.gz R1_u_trimmed.fastq.gz R2_p_trimmed.fastq.gz R2_u_trimmed.fastq.gz
+ILLUMINACLIP:NovaSeq.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:36</code></pre>
 <ul>
 <li><ul>
-<li><em>READS_R1.fastq.gz</em> and <em>READS_R2.fastq.gz</em> are the raw, zipped .fastq files downloaded from Nanuq.</li>
-<li><em>trimmed1.p.fastq.gz</em> and <em>trimmed2.p.fastq.gz</em> are the outputted trimmed, <em>paired</em> reads.</li>
-<li><em>trimmed1.u.fastq.gz</em> and <em>trimmed2.u.fastq.gz</em> are the outputted trimmed, <em>unpaired</em> reads.</li>
+<li><em>R1.fastq.gz</em> and <em>R2.fastq.gz</em> are the raw, zipped .fastq files downloaded from Nanuq.</li>
+<li><em>R1_p_trimmed.fastq.gz</em> and <em>R2_p_trimmed.fastq.gz</em> are the outputted trimmed, <em>paired</em> reads.</li>
+<li><em>R1_u_trimmed.fastq.gz</em> and <em>R2_u_trimmed.fastq.gz</em> are the outputted trimmed, <em>unpaired</em> reads.</li>
 <li><em>NovaSeq.fa</em> is the .fasta file containing the adaptor sequences.</li>
 </ul></li>
-<li>Proceed with <em>trimmed1.p.fastq.gz</em> and <em>trimmed2.p.fastq.gz</em> files.</li>
+<li>Proceed with trimmed reads in <em>R1_p_trimmed.fastq.gz</em> and <em>R2_p_trimmed.fastq.gz</em> files.</li>
 </ul>
+</div>
+<div id="assemble-metagenomes" class="section level2">
+<h2>Assemble metagenomes</h2>
+<ul>
+<li>Assemble a metagenome relatively quickly with <a href="https://github.com/voutcn/megahit" title="MEGAHIT">MEGAHIT</a> version 1.0.6.</li>
+</ul>
+<pre class="shell"><code>megahit -1 PATH/R1_p_trimmed.fastq.gz -2 PATH/R2_p_trimmed.fastq.gz
+--k-list 23,43,63,83,103,123 -o PATH/OUTPUT_DIRECTORY/ --verbose</code></pre>
+<ul>
+<li>You can create a combined assembly (co-assembly) by listing reads from separate metagenomes separated by commas.</li>
+</ul>
+<pre class="shell"><code>megahit -1 PATH/METAGENOME1_R1_p_trimmed.fastq.gz,PATH/METAGENOME2_R1_p_trimmed.fastq.gz,PATH/METAGENOME3_R1_p_trimmed.fastq.gz -2 PATH/METAGENOME1_R2_p_trimmed.fastq.gz,PATH/METAGENOME2_R2_p_trimmed.fastq.gz,PATH/METAGENOME3_R2_p_trimmed.fastq.gz --k-list 23,43,63,83,103,123 -o PATH/OUTPUT_DIRECTORY/ --verbose</code></pre>
 </div>
 </div>
 
