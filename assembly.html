@@ -450,7 +450,9 @@ ILLUMINACLIP:NovaSeq.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:3
 <ul>
 <li>You can create a combined assembly (co-assembly) by listing reads from separate metagenomes separated by commas.</li>
 </ul>
-<pre class="shell"><code>megahit -1 PATH/METAGENOME1_R1_p_trimmed.fastq.gz,PATH/METAGENOME2_R1_p_trimmed.fastq.gz,PATH/METAGENOME3_R1_p_trimmed.fastq.gz -2 PATH/METAGENOME1_R2_p_trimmed.fastq.gz,PATH/METAGENOME2_R2_p_trimmed.fastq.gz,PATH/METAGENOME3_R2_p_trimmed.fastq.gz --k-list 23,43,63,83,103,123 -o PATH/OUTPUT_DIRECTORY/ --verbose</code></pre>
+<pre class="shell"><code>megahit -1 PATH/METAGENOME1_R1_p_trimmed.fastq.gz,PATH/METAGENOME2_R1_p_trimmed.fastq.gz,PATH/METAGENOME3_R1_p_trimmed.fastq.gz
+-2 PATH/METAGENOME1_R2_p_trimmed.fastq.gz,PATH/METAGENOME2_R2_p_trimmed.fastq.gz,PATH/METAGENOME3_R2_p_trimmed.fastq.gz
+--k-list 23,43,63,83,103,123 -o PATH/OUTPUT_DIRECTORY/ --verbose</code></pre>
 </div>
 </div>
 

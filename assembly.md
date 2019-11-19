@@ -73,5 +73,7 @@ megahit -1 PATH/R1_p_trimmed.fastq.gz -2 PATH/R2_p_trimmed.fastq.gz
 - You can create a combined assembly (co-assembly) by listing reads from separate metagenomes separated by commas.
 
 ```shell
-megahit -1 PATH/METAGENOME1_R1_p_trimmed.fastq.gz,PATH/METAGENOME2_R1_p_trimmed.fastq.gz,PATH/METAGENOME3_R1_p_trimmed.fastq.gz -2 PATH/METAGENOME1_R2_p_trimmed.fastq.gz,PATH/METAGENOME2_R2_p_trimmed.fastq.gz,PATH/METAGENOME3_R2_p_trimmed.fastq.gz --k-list 23,43,63,83,103,123 -o PATH/OUTPUT_DIRECTORY/ --verbose
+megahit -1 PATH/METAGENOME1_R1_p_trimmed.fastq.gz,PATH/METAGENOME2_R1_p_trimmed.fastq.gz,PATH/METAGENOME3_R1_p_trimmed.fastq.gz
+-2 PATH/METAGENOME1_R2_p_trimmed.fastq.gz,PATH/METAGENOME2_R2_p_trimmed.fastq.gz,PATH/METAGENOME3_R2_p_trimmed.fastq.gz
+--k-list 23,43,63,83,103,123 -o PATH/OUTPUT_DIRECTORY/ --verbose
 ```
