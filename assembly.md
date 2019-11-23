@@ -13,7 +13,7 @@ Created by Susanne Kraemer; transcribed and edited by Rebecca Garner
 
 * [Assemble metagenomes](#assemble-metagenomes)
 
-* [Reconstruct full-length ribosomal genes](reconstruct-full-length-ribosomal-genes) (_optional_)
+* [Reconstruct full-length ribosomal genes](#reconstruct-full-length-ribosomal-genes) (_optional_)
 
 ## Download raw .fastq files
 
