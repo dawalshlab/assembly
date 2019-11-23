@@ -13,6 +13,8 @@ Created by Susanne Kraemer; transcribed and edited by Rebecca Garner
 
 * [Assemble metagenomes](#assemble-metagenomes)
 
+* [Reconstruct full-length ribosomal genes](reconstruct-full-length-ribosomal-genes) (_optional_)
+
 ## Download raw .fastq files
 
 ### 1. Download files from Nanuq
@@ -76,4 +78,22 @@ megahit -1 PATH/R1_p_trimmed.fastq.gz -2 PATH/R2_p_trimmed.fastq.gz
 megahit -1 PATH/METAGENOME1_R1_p_trimmed.fastq.gz,PATH/METAGENOME2_R1_p_trimmed.fastq.gz,PATH/METAGENOME3_R1_p_trimmed.fastq.gz
 -2 PATH/METAGENOME1_R2_p_trimmed.fastq.gz,PATH/METAGENOME2_R2_p_trimmed.fastq.gz,PATH/METAGENOME3_R2_p_trimmed.fastq.gz
 --k-list 23,43,63,83,103,123 -o PATH/OUTPUT_DIRECTORY/ --verbose
+```
+
+## Reconstruct full-length ribosomal genes
+
+This is an _optional_ step to reconstruct full-length SSU rRNA genes from unassembled metagenomes with [EMIRGE](https://github.com/csmiller/EMIRGE "EMIRGE").
+
+- Unzip reverse (R2) reads using ```zcat R2_p_trimmed.fastq.gz > R2_p_trimmed.fastq```
+- Execute the EMIRGE command:
+```shell
+emirge.py PATH/OUTPUT_DIRECTORY -1 PATH/R1_p_trimmed.fastq.gz -2 PATH/R2_p_trimmed.fastq
+-f PATH/SILVA_132_SSURef_Nr99_tax_silva_trunc.ge1200bp.le2000bp.0.97.fixed.fasta
+-b PATH/SILVA_132_SSURef_Nr99_tax_silva_trunc.ge1200bp.le2000bp.0.97.fixed
+-l 151 -i 500 -s 500 --phred33
+```
+- Execute EMIRGE rename fasta command: 
+
+```shell
+emirge_rename_fasta.py PATH/OUTPUT_DIRECTORY/iter.40 > PATH/OUTPUT_DIRECTORY/SAMPLE_renamed.fasta
 ```

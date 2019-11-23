@@ -379,6 +379,7 @@ summary {
 </ol></li>
 <li><p><a href="#trim-reads">Trim reads</a></p></li>
 <li><p><a href="#assemble-metagenomes">Assemble metagenomes</a></p></li>
+<li><p><a href="reconstruct-full-length-ribosomal-genes">Reconstruct full-length ribosomal genes</a> (<em>optional</em>)</p></li>
 </ul>
 </div>
 <div id="download-raw-.fastq-files" class="section level2">
@@ -453,6 +454,22 @@ ILLUMINACLIP:NovaSeq.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:3
 <pre class="shell"><code>megahit -1 PATH/METAGENOME1_R1_p_trimmed.fastq.gz,PATH/METAGENOME2_R1_p_trimmed.fastq.gz,PATH/METAGENOME3_R1_p_trimmed.fastq.gz
 -2 PATH/METAGENOME1_R2_p_trimmed.fastq.gz,PATH/METAGENOME2_R2_p_trimmed.fastq.gz,PATH/METAGENOME3_R2_p_trimmed.fastq.gz
 --k-list 23,43,63,83,103,123 -o PATH/OUTPUT_DIRECTORY/ --verbose</code></pre>
+</div>
+<div id="reconstruct-full-length-ribosomal-genes" class="section level2">
+<h2>Reconstruct full-length ribosomal genes</h2>
+<p>This is an <em>optional</em> step to reconstruct full-length SSU rRNA genes from unassembled metagenomes with <a href="https://github.com/csmiller/EMIRGE" title="EMIRGE">EMIRGE</a>.</p>
+<ul>
+<li>Unzip reverse (R2) reads using <code>zcat R2_p_trimmed.fastq.gz &gt; R2_p_trimmed.fastq</code></li>
+<li>Execute the EMIRGE command:</li>
+</ul>
+<pre class="shell"><code>emirge.py PATH/OUTPUT_DIRECTORY -1 PATH/R1_p_trimmed.fastq.gz -2 PATH/R2_p_trimmed.fastq
+-f PATH/SILVA_132_SSURef_Nr99_tax_silva_trunc.ge1200bp.le2000bp.0.97.fixed.fasta
+-b PATH/SILVA_132_SSURef_Nr99_tax_silva_trunc.ge1200bp.le2000bp.0.97.fixed
+-l 151 -i 500 -s 500 --phred33</code></pre>
+<ul>
+<li>Execute EMIRGE rename fasta command:</li>
+</ul>
+<pre class="shell"><code>emirge_rename_fasta.py PATH/OUTPUT_DIRECTORY/iter.40 &gt; PATH/OUTPUT_DIRECTORY/SAMPLE_renamed.fasta</code></pre>
 </div>
 </div>
 
