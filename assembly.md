@@ -15,6 +15,10 @@ Created by Susanne Kraemer; transcribed and edited by Rebecca Garner
 
 * [Reconstruct full-length ribosomal genes](#reconstruct-full-length-ribosomal-genes) (_optional_)
 
+* [Map reads](#map-reads)
+
+* [Submit assemblies to IMG](#submit-assemblies-to-img)
+
 ## Download raw .fastq files
 
 ### 1. Download files from Nanuq
@@ -96,4 +100,24 @@ emirge.py PATH/OUTPUT_DIRECTORY -1 PATH/R1_p_trimmed.fastq.gz -2 PATH/R2_p_trimm
 
 ```shell
 emirge_rename_fasta.py PATH/OUTPUT_DIRECTORY/iter.40 > PATH/OUTPUT_DIRECTORY/SAMPLE_renamed.fasta
+```
+
+## Map reads
+
+Read mapping can be perfomed with either BBMap or Burrows-Wheeler Aligner (BWA).
+
+## Submit assemblies to IMG
+
+- Format BBMap coverage file (_covstats.txt_) for IMG GOLD submission in R:
+```r
+# Load library
+library(tidyverse)
+
+# Import covstats.txt
+(covstats <- read_tsv("PATH/covstats.txt", col_names = TRUE) %>%
+  rename(ID = `#ID`) %>%
+  select(ID, Avg_fold))
+
+# Write new file
+write_tsv(covstats, path = "PATH/OUTPUT_DIRECTORY/avgfold.txt")
 ```
