@@ -31,7 +31,7 @@ Created by Susanne Kraemer; transcribed and edited by Rebecca Garner
 
 ### 2. Download files to the server
 - Move the downloaded folder and MD5 file to the server.
-- Run the _run_wget.sh_ script: ```./run_wget.sh```
+- Run the _run_wget.sh_ script: ```sh run_wget.sh```
 - Enter __Nanuq__ username and password.
   
 This will start the download of two .fastq files (forward _\_R1_ and reverse _\_R2_ reads) and two corresponding md5 files __per sample__.
@@ -39,7 +39,7 @@ This will start the download of two .fastq files (forward _\_R1_ and reverse _\_
 ### 3. Check md5 sums
 __md5__ files contain file size as a hexadecimal number which can be used to verify file integrity (e.g., make sure your downloads are intact). Use ```md5sum``` to ensure that your downloads did not get interrupted. ```md5sum``` will check file size and look for the corresponding md5 file for each of your read files and evaluate if there is a match.
   
-- Check md5 sums: ```md5sum -c```
+- Check md5 sums: ```md5sum -c *.md5```
 - If file is not _OK_ (i.e. _FAILED_): Redownload .fastq and associated files from Nanuq.
 
 ## Trim reads

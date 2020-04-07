@@ -403,7 +403,7 @@ summary {
 <h3>2. Download files to the server</h3>
 <ul>
 <li>Move the downloaded folder and MD5 file to the server.</li>
-<li>Run the <em>run_wget.sh</em> script: <code>./run_wget.sh</code></li>
+<li>Run the <em>run_wget.sh</em> script: <code>sh run_wget.sh</code></li>
 <li>Enter <strong>Nanuq</strong> username and password.</li>
 </ul>
 <p>This will start the download of two .fastq files (forward <em>_R1</em> and reverse <em>_R2</em> reads) and two corresponding md5 files <strong>per sample</strong>.</p>
@@ -412,7 +412,7 @@ summary {
 <h3>3. Check md5 sums</h3>
 <p><strong>md5</strong> files contain file size as a hexadecimal number which can be used to verify file integrity (e.g., make sure your downloads are intact). Use <code>md5sum</code> to ensure that your downloads did not get interrupted. <code>md5sum</code> will check file size and look for the corresponding md5 file for each of your read files and evaluate if there is a match.</p>
 <ul>
-<li>Check md5 sums: <code>md5sum -c</code></li>
+<li>Check md5 sums: <code>md5sum -c *.md5</code></li>
 <li>If file is not <em>OK</em> (i.e. <em>FAILED</em>): Redownload .fastq and associated files from Nanuq.</li>
 </ul>
 </div>
