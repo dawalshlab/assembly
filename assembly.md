@@ -1,6 +1,6 @@
 # Metagenome assembly pipeline
 
-Created by Susanne Kraemer; transcribed and edited by Rebecca Garner
+Created by Susanne Kraemer and Rebecca Garner; transcribed and edited by RG
 
 ## Table of contents
 
@@ -53,7 +53,7 @@ AGATCGGAAGAGCACACGTCTGAACTCCAGTCAC
 >PrefixPE/2
 AGATCGGAAGAGCGTCGTGTAGGGAAAGAGTGT
 ```
-- Trim adaptor sequences, low quality bases, and ultrashort reads with [trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic "Trimmomatic") version 0.38:
+- Trim adaptor sequences, low quality bases, and ultrashort reads with [Trimmomatic](http://www.usadellab.org/cms/?page=trimmomatic "Trimmomatic") version 0.38:
 
 ```shell
 java –jar trimmomatic-0.38.jar PE R1.fastq.gz R2.fastq.gz
@@ -68,6 +68,18 @@ ILLUMINACLIP:NovaSeq.fa:2:30:10 LEADING:3 TRAILING:3 SLIDINGWINDOW:4:15 MINLEN:3
 - Proceed with trimmed reads in _R1_p_trimmed.fastq.gz_ and _R2_p_trimmed.fastq.gz_ files.
 
 ## Assemble metagenomes
+
+### Assemble metagenomes with metaSPAdes
+
+- Assemble a metagenome with [metaSPAdes](http://cab.spbu.ru/software/spades/).
+
+```shell
+python metaspades.py --only-assembler -k 21,33,55,77,99,127
+-1 R1_p_trimmed.fastq.gz -2 R2_p_trimmed.fastq.gz
+-o metaspades_assembly
+```
+
+### Assemble metagenomes with MEGAHIT
 
 - Assemble a metagenome relatively quickly with [MEGAHIT](https://github.com/voutcn/megahit "MEGAHIT") version 1.0.6.
 
